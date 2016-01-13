@@ -1,0 +1,16 @@
+<%= link_to "New","/todos/new"%> 
+
+<br/>
+<br/>
+<h2>My TODOs</h2>
+          <% if flash[:notice] %>     
+            <p><%= flash[:notice] %></p>
+          <% end %>
+<ul>
+<% @todos.each do |todo| %>
+	<li>
+  	 <%= todo["title"] %>
+	</li>
+ 
+<% end %>
+</ul>
