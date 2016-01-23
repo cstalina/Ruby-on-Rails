@@ -1,0 +1,12 @@
+<h1>Posts#create</h1>
+<p>Find me in app/views/posts/create.html.erb</p>
+
+<%= link_to "Sign_out", "/users/sign_out", method: :delete %> 
+
+<%=form_tag({action:"create"}) do %>
+
+   <%= text_field_tag :description %>
+   <%= select_tag :user_id, options_from_collection_for_select(@users, :id, :name) %> 
+   <%= submit_tag "Post" %>
+
+<% end %>

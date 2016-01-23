@@ -1,0 +1,78 @@
+<br/>
+<h1>Facebook</h1>
+
+
+<%= link_to "My Profile", "/profile" %> 
+<%= link_to "Sign_out", "/users/sign_out", method: :delete %> 
+<br/>
+<br/>
+
+<!--<% if flash[:notice] %>     
+            <p><%= flash[:notice] %></p>
+<% end %>
+
+<br/>
+<br/> -->
+
+
+<%=form_tag({action:"create"}) do %>
+
+   <%= text_field_tag :description %>
+   
+   <%= submit_tag "Post" %>
+
+<% end %>
+
+
+
+<br/>
+<br/>
+
+
+<ul>
+<% @posts.each do |post| %>
+
+	<li>
+  	 	<%= post.description %> - <%= post.user.email %>
+  	 	<br/>
+      
+      
+      <% if current_user == post.user %>
+          <br/><%= link_to "Delete ", "posts/delete?post_id=#{post.id}" %>
+      <% end %>
+      <% unless current_user.already_likes?(post) %>
+          <br/><%= link_to "Like", "posts/like?post_id=#{post.id}" %>
+      <% end %>
+      <% if current_user.already_likes?(post) %>
+          <br/><%= link_to "Unlike", "posts/unlike?post_id=#{post.id}" %>
+      <% end %>
+  	 
+  	 	<%= post.likes.count %> Likes
+      <br/>
+
+      <ul>
+      <% post.comments.each do |comment| %>
+
+        <li>
+            <%= link_to comment.user.name, "users/#{comment.user.id}" %>
+            (<%= comment.user.email %>) said :  <%= comment.content %>
+            </li>
+      <% end %>
+      </ul>
+
+
+
+      <br/>
+
+      <%=form_tag({action:"add_comment"}) do %>
+
+          <%= text_field_tag :content %>
+          <%= hidden_field_tag 'post_id', post.id %>
+   
+          <%= submit_tag "Comment" %>
+
+      <% end %>
+      <br/>
+   </li>
+<% end %>
+</ul>

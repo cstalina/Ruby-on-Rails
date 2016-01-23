@@ -1,0 +1,64 @@
+<br/>
+<h1>Facebook</h1>
+<h2>Hi, <%= current_user.name %> ! </h2>
+
+<br/>
+<%= link_to "Home", "/posts" %> 
+<%= link_to "Edit Profile", "/profile/edit"%> 
+<%= link_to "Sign_out", "/users/sign_out", method: :delete %> 
+
+<br/>
+<br/>
+
+<%=form_tag({action:"create"}) do %>
+
+   <%= text_field_tag :description %>
+   
+   <%= submit_tag "Post" %>
+
+<% end %>
+
+<br/>
+<br/>
+
+<ul>
+<% @posts.each do |post| %>
+
+	<li>
+  	 	<%= post.description %> - <%= post.user.email %>
+      <br/>
+      <br/><%= link_to "Delete ", "posts/delete?post_id=#{post.id}" %>
+     
+  	 	<br/>
+  	 	<br/><%= link_to "Like ", "posts/like?post_id=#{post.id}" %> 
+           
+  	 
+  	 	<%= post.likes.count %> Likes
+      <br/>
+
+      <ul>
+      <% post.comments.each do |comment| %>
+
+        <li>
+            <%= link_to comment.user.name, "users/#{comment.user.id}" %>
+            (<%= comment.user.email %>) said :  <%= comment.content %>
+            </li>
+      <% end %>
+      </ul>
+
+
+
+      <br/>
+
+      <%=form_tag({action:"add_comment"}) do %>
+
+          <%= text_field_tag :content %>
+         <%= hidden_field_tag 'post_id', post.id %>
+   
+          <%= submit_tag "Comment" %>
+
+      <% end %>
+      <br/>
+   </li>
+<% end %>
+</ul>

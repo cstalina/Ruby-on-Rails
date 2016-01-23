@@ -1,0 +1,12 @@
+<h1>Edit Profile</h1>
+
+<br/>
+<br/>
+
+<%=form_tag({action:"save"}) do %>
+
+   <%= text_field_tag :name %>
+   
+   <%= submit_tag "Add Name" %>
+
+<% end %>
