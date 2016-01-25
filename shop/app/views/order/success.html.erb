@@ -1,0 +1,19 @@
+<% if buyer_signed_in? %>
+          <br/><%= button_to "Sign_out", "/buyers/sign_out", method: :delete %> 
+
+<% end %> 
+<br/>
+<br/>
+<%= link_to "Home", "/products" %>
+<% @categories.each do |category| %>
+
+
+     | <%= link_to category.name , "/categories/#{category.id}/products" %> 
+      
+<% end %>
+<br/>
+<br/>
+<br/>
+<br/>
+
+<div id="thanks"><h1>THANKS FOR SHOPPING !</h1></div>

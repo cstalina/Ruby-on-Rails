@@ -1,0 +1,25 @@
+
+<% if buyer_signed_in? %>
+          <br/><%= button_to "Sign_out", "/buyers/sign_out", method: :delete %> 
+<% else %>
+    <%= button_to "Sign_in", "/buyers/sign_in" %>
+<% end %> 
+<br/>
+<%= link_to "Home", "/products" %>
+
+<% @categories.each do |category| %>
+
+ 
+      | <%= link_to category.name , "/categories/#{category.id}/products" %> 
+      
+<% end %>
+<br/>
+<div >
+
+ 	 <h1 > <%= @product.title %> - $<%=  @product.price %></h1> 
+     <p > <%=  @product.description %> </p>
+     <% if buyer_signed_in? %>
+     	<%= button_to "Add to Cart", "/products/#{@product.id}/buy" %>
+     <% end %>
+
+ <div>

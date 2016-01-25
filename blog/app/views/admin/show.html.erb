@@ -1,0 +1,39 @@
+      
+
+<div >
+
+  <h1 > <%= @article.title %> </h1> 
+    <p > <%= simple_format h @article.content %> </p>
+
+    <br/>Submitted <%= time_ago_in_words(@article.created_at) %> Ago
+     - <%= @article.number_of_views %> views
+
+    <div>
+
+
+<ul>
+    <% @article.comments.each do |comment| %>
+
+       <li>
+            <%= comment.name %> said : 
+            <br/>
+            <%= comment.content %>
+       </li>
+    <% end %>
+</ul>
+
+
+
+<br/>
+
+<%=form_tag({action:"add_comment"}) do %>
+	Comment as Admin :
+
+    <br/>
+    <%= text_field_tag :content %>
+    <%= hidden_field_tag 'article_id', @article.id %>
+    <%= submit_tag "Add Comment" %>
+    <br/>
+    <%= link_to "Back to Admin Panel", "/admin/articles" %>
+
+<% end %>

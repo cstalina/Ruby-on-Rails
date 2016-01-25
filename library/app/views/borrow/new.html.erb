@@ -1,0 +1,15 @@
+
+
+<%=form_tag({action:"create"}) do %>
+	
+   Name :
+	<br/> 
+   <%= text_field_tag :name %>
+   <br/>
+   Returning Date :
+   <br/>
+   <%= date_field_tag :returning_date %>
+  
+   <%= submit_tag "Borrow" %>
+
+<% end %>

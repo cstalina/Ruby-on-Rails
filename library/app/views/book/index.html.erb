@@ -1,0 +1,17 @@
+<br/>
+<%= button_to "Add book", "/add_book" %>
+<ul>
+<% @books.each do |book| %>
+
+	<li>
+  	 	<%= book.title %>  - <%= @status[book.id] %>
+  	 	<%= button_to "Details", "/show/#{book.id}"%> 
+ 
+  	 	<% if @status[book.id]=="Available" %>
+  	 		<%= button_to "Borrow", "/borrow/#{book.id}"%>
+  	 	<% end %>
+
+  	 	<br/>
+  	 	</li>
+ <% end %>
+ </ul>

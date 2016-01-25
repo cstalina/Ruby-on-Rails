@@ -1,0 +1,27 @@
+<h1>Edit Post</h1>
+<br/>
+<br/>
+
+<%=form_tag({action:"update"}) do %>
+	<br/>
+	<br/>
+	Title :
+	<br/>
+   <%= text_field_tag :title ,  @article.title %>
+   <%= hidden_field_tag 'article_id', @article.id %>
+   <br/>
+
+
+   <br/>
+   Content :
+   <br/>
+
+   <%= text_field_tag :content,  @article.content  %>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <%= submit_tag "Save Article" %>
+
+<% end %>
+

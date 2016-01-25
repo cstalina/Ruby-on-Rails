@@ -1,0 +1,23 @@
+<br/>
+<br/>
+<br/>
+<div id="book">
+
+<h2>Book title : <%= @book.title %></h2> 
+<br/>
+<h4>Borrowing history:</h4>
+<ul>
+<br/>
+<% @borrows.each do |borrow| %>
+
+	<li>
+  	 	<b><%= borrow.name %></b>  - returning date : <%= borrow.returning_date %>
+
+
+  	 	<br/>
+  	 	</li>
+ <% end %>
+ </ul>
+ </br>
+ <%=  link_to "Back", "/library" %>
+ </div>

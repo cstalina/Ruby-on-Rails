@@ -1,0 +1,26 @@
+<h1>Admin Panel</h1>
+
+<table style="border: 1px solid black;" >
+  <tbody>
+    <tr  style="border: 1px solid black;">  
+      <td style="border: 1px solid black;"> Article's Title </td>
+      <td style="border: 1px solid black;"> Created at </td>
+      <td style="border: 1px solid black;"> Edit </td>
+      <td style="border: 1px solid black;"> Delete </td>
+
+
+    </tr>
+  </tbody>
+  
+  <tbody >
+  	<% @articles.each do |article| %>
+    <tr style="border: 1px solid black;">
+      <td style="border: 1px solid black;"><%= article.title %></td>
+      <td style="border: 1px solid black;"><%= article.created_at.strftime("%B %d, %Y") %> </td>
+      <td style="border: 1px solid black;"><%= link_to "Edit", "/admin/edit?article_id=#{article.id}" %></td>
+      <td style="border: 1px solid black;"><%= link_to "Delete ", "/admin/delete?article_id=#{article.id}" %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+   <%= link_to "Add Article", "/admin/articles/new" %>

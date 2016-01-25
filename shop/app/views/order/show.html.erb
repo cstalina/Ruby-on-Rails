@@ -1,0 +1,53 @@
+
+<% if buyer_signed_in? %>
+          <br/><%= button_to "Sign_out", "/buyers/sign_out", method: :delete %> 
+
+<% end %> 
+<br/>
+<br/>
+<%= link_to "Home", "/products" %>
+<% @categories.each do |category| %>
+
+
+     | <%= link_to category.name , "/categories/#{category.id}/products" %> 
+      
+<% end %>
+<br/>
+<br/>
+<%= link_to "You have #{@order_items.count} items in your cart." , "/checkout" %>
+<br/>
+<br/>
+
+<% if flash[:notice] %>
+  <p><%= flash[:notice] %></p>
+<% end %>
+<% if @order_items.count >0 %>
+<table  >
+  <tbody>
+    <tr  >  
+      <td > Product's Title </td>
+      <td > Price </td>
+
+
+
+    </tr>
+  </tbody>
+  
+  <tbody >
+  	<% @items.each do |item| %>
+    <tr >
+      <td ><%= item.title %></td>
+      <td >$<%= item.price %></td>
+
+      <td ><%= button_to "Remove from cart", "/products/#{item.id}/remove" %></td>
+
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<div id="total"><h3>TOTAL : $<%= @sum %> </h3></div>
+
+<br/>
+<div id="purchase"><%= button_to "Purchase", "/checkout/pay" %></div>
+
+<%end %>

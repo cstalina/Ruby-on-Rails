@@ -1,0 +1,58 @@
+
+
+<% if buyer_signed_in? %>
+          <br/><%= button_to "Sign Out", "/buyers/sign_out", method: :delete %> 
+
+<% else %>
+    <%= button_to "Sign In", "/buyers/sign_in" %>
+<% end %> 
+<br/>
+<br/>
+<%= link_to "Home", "/products" %>
+<% @categories.each do |category| %>
+
+
+     | <%= link_to category.name , "/categories/#{category.id}/products" %> 
+      
+<% end %>
+<br/>
+<br/>
+<% if buyer_signed_in? %>
+    <%= link_to "You have #{@order_items.count} items in your cart." , "/checkout" %>
+<% end %> 
+<br/>
+<br/>
+
+
+<table  >
+  <tbody>
+    <tr  >  
+      <td > Product's Title </td>
+      <td > Price </td>
+
+
+
+    </tr>
+  </tbody>
+  
+  <tbody >
+  	<% @products.each do |product| %>
+    <tr >
+      <td ><%= product.title %></td>
+      <td >$<%= product.price %></td>
+
+      <td ><%= link_to "Details", "/products/#{product.id}" %></td>
+      <% if buyer_signed_in? %>
+      <td ><%= button_to "Add to Cart", "/products/#{product.id}/buy" %></td>
+      <%else%>
+      <td ><%= button_to "Add to Cart", "/buyers/sign_in" %></td>
+      <%end%>
+
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% if flash[:notice] %>
+  <p><%= flash[:notice] %></p>
+<% end %>
